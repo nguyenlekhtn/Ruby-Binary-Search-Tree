@@ -156,10 +156,13 @@ class Tree
   end
 
   def level_order_rec(queue = [root], result = [])
-    return if queue.empty?
+    return result if queue.empty?
 
-    puts queue[0]
-    
+    front = queue[0]
+    queue = queue[1..]
+    queue.push(front.left) if front.left
+    queue.push(front.right) if front.right
+    level_order_rec(queue, result + [front.data])
   end
 
   # def remove_from_tree(parent_node, branch)
