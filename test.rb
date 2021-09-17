@@ -32,3 +32,12 @@ Tree.from_arr(arr).pretty_print
 p Tree.from_arr(arr).level_order
 # require 'pry-byebug'; binding.pry
 p Tree.from_arr(arr).level_order_rec
+
+puts "Print inorder"
+p Tree.from_arr(arr).inorder
+
+puts "Print preorder"
+p Tree.from_arr(arr).preorder
+
+puts "Print postorder"
+p Tree.from_arr(arr).postorder

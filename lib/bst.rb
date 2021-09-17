@@ -165,6 +165,36 @@ class Tree
     level_order_rec(queue, result + [front.data])
   end
 
+  # def inorder(node = root)
+  #   result = []
+  #   inorder_inner = lambda do |node_inner|
+  #     return if node_inner.nil?
+
+  #     inorder_inner(node_inner.left)
+  #     result.push(node_inner.data)
+  #     inorder_inner(node_inner.left)
+  #   end
+
+  #   inorder_inner[node]
+  #   result
+  # end
+
+  def inorder(node = root)
+    return [] if node.nil?
+    [*inorder(node.left)] + [node.data] + [*inorder(node.right)]
+  end
+
+  def preorder(node = root)
+    return [] if node.nil?
+    [node.data] + [*preorder(node.left)] + [*preorder(node.right)]
+  end
+
+  def postorder(node = root)
+    return [] if node.nil?
+
+    [*postorder(node.left)] + [*postorder(node.right)] + [node.data]
+  end
+
   # def remove_from_tree(parent_node, branch)
   #   parent_node.set_branch(branch, nil)
   # end
