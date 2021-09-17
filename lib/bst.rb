@@ -1,6 +1,5 @@
 require 'pp'
 
-
 class Node
   include Comparable
   def initialize(data = nil, left = nil, right = nil)
@@ -55,7 +54,8 @@ class Tree
       middle_point = arr.length / 2
       first_half_length = (0...middle_point).size
       second_half_length = arr.length - first_half_length
-      Node.new(arr[middle_point], build_from_sorted.call(arr[0, first_half_length]), build_from_sorted.call(arr[middle_point + 1, second_half_length]))
+      Node.new(arr[middle_point], build_from_sorted.call(arr[0, first_half_length]),
+               build_from_sorted.call(arr[middle_point + 1, second_half_length]))
     end
 
     build_from_sorted.call(array.uniq.sort)
@@ -181,11 +181,13 @@ class Tree
 
   def inorder(node = root)
     return [] if node.nil?
+
     [*inorder(node.left)] + [node.data] + [*inorder(node.right)]
   end
 
   def preorder(node = root)
     return [] if node.nil?
+
     [node.data] + [*preorder(node.left)] + [*preorder(node.right)]
   end
 
@@ -193,6 +195,23 @@ class Tree
     return [] if node.nil?
 
     [*postorder(node.left)] + [*postorder(node.right)] + [node.data]
+  end
+
+  def depth(node, result = 0, cursor = root)
+    return nil if node.nil?
+
+    case node.data <=> cursor.data
+    when -1
+      depth(node, result + 1, cursor.left)
+    when 1
+      depth(node, result + 1, cursor.right)
+    when 0
+      node == cursor ? result : nil
+    end
+  end
+
+  def balanced?
+    (height(root) - min_height(root)).abs <= 1
   end
 
   # def remove_from_tree(parent_node, branch)
@@ -245,4 +264,26 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def rebalance
+    Tree.from_arr(inorder)
+  end
+end
+
+def height(node, max = 0)
+  return 0 if node.nil?
+  return max if node.left.nil? && node.right.nil?
+
+  left_height = height(node.left, max + 1)
+  right_height = height(node.right, max + 1)
+  left_height > right_height ? left_height : right_height
+end
+
+def min_height(node, min = 0)
+  return 0 if node.nil?
+  return min if node.left.nil? || node.right.nil?
+
+  left_height = min_height(node.left, min + 1)
+  right_height = min_height(node.right, min + 1)
+  left_height < right_height ? left_height : right_height
 end
