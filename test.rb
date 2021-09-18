@@ -1,5 +1,4 @@
 require_relative 'lib/bst'
-require 'awesome_print'
 
 arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 p arr
@@ -71,7 +70,7 @@ tree1 = Tree.from_arr(arr).insert(10)
 tree1.pretty_print
 tree1.rebalance.pretty_print
 
-puts "rebalance"
+puts 'rebalance'
 tree2 = Tree.from_arr(arr).delete(5).insert(11).delete(1)
 tree2.pretty_print
 tree2.rebalance.pretty_print

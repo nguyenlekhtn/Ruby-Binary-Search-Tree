@@ -1,4 +1,4 @@
-require_relative 'lib/bst.rb'
+require_relative 'lib/bst'
 
 puts 'Create a binary search tree from an array of random numbers'
 tree = Tree.from_arr(Array.new(15) { rand(1..100) })
@@ -20,4 +20,3 @@ puts "\nRebalance"
 tree = tree.rebalance
 tree.pretty_print
 puts "Balanced: #{tree.balanced?}"
-

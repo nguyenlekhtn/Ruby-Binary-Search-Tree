@@ -1,5 +1,3 @@
-require 'pp'
-
 class Node
   include Comparable
   def initialize(data = nil, left = nil, right = nil)
@@ -165,20 +163,6 @@ class Tree
     level_order_rec(queue, result + [front.data])
   end
 
-  # def inorder(node = root)
-  #   result = []
-  #   inorder_inner = lambda do |node_inner|
-  #     return if node_inner.nil?
-
-  #     inorder_inner(node_inner.left)
-  #     result.push(node_inner.data)
-  #     inorder_inner(node_inner.left)
-  #   end
-
-  #   inorder_inner[node]
-  #   result
-  # end
-
   def inorder(node = root)
     return [] if node.nil?
 
@@ -213,51 +197,6 @@ class Tree
   def balanced?
     (height(root) - min_height(root)).abs <= 1
   end
-
-  # def remove_from_tree(parent_node, branch)
-  #   parent_node.set_branch(branch, nil)
-  # end
-
-  # def delete_node_one_child(parent_node, branch)
-  #   node = parent_node.get_branch(branch)
-  #   node_child = node.left || node.right
-  #   parent_node.set_branch(branch, node_child)
-  # end
-
-  # def tree_min(node)
-  #   return node if node.left.nil?
-
-  #   tree_min(node.left)
-  # end
-
-  # def find_min_right_subtree(node)
-  #   tree_min(node.right)
-  # end
-
-  # def delete_node_two_child(node)
-  #   found_parent, found_branch = find_min_right_subtree(node)
-  #   found_node = found_parent.get_branch(branch)
-
-  #   node.data = found_node.data
-  #   delete_node(found_parent, found_branch)
-  # end
-
-  # def delete_node(parent_node, branch)
-  #   node = parent_node.get_branch(branch)
-  #   case node.child_size
-  #   when 0
-  #     remove_from_tree(parent_node, branch)
-  #   when 1
-  #     delete_node_one_child(parent_node, branch)
-  #   when 2
-  #     delete_node_two_child(parent_node, branch)
-  #   end
-  # end
-
-  # def delete(value)
-  #   node = find(value)
-  #   delete_node(node)
-  # end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
