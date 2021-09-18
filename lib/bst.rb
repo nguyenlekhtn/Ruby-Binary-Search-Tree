@@ -168,7 +168,7 @@ class Tree
   def depth(node, result = 0, cursor = root)
     return nil if node.nil?
 
-    case node.data <=> cursor.data
+    case node <=> cursor
     when -1
       depth(node, result + 1, cursor.left)
     when 1
