@@ -6,7 +6,7 @@ class Node
     @right = right
   end
 
-  attr_accessor :data, :left, :right
+  attr_reader :data, :left, :right
 
   def <=>(other)
     data <=> other.data
@@ -14,22 +14,6 @@ class Node
 
   def no_child?
     left.nil? && right.nil?
-  end
-
-  def get_branch(branch)
-    send(branch.to_sym)
-  end
-
-  def set_branch(branch, node)
-    send("#{branch}=".to_sym, node)
-  end
-
-  def child_size
-    size = 0
-    size += 1 unless left.nil?
-    size += 1 unless right.nil?
-
-    size
   end
 end
 
